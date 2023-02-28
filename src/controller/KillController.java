@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.swing.JOptionPane;
+
 public class KillController {
 	
 	private String os() {
@@ -30,16 +32,44 @@ public class KillController {
 				e.printStackTrace();
 			}
 		} else {
-			
+			// colocar comandos do linux
 		}
 		
 	}
 	
 	public void mataPid() {
-		
+		int PID = 0;
+		PID = Integer.parseInt(JOptionPane.showInputDialog("Digite o PID a ser morto"));
+		String nome = System.getProperty("os.name");
+		if(nome.contains("Windows")) {
+			String processo = "TASKKILL /PID " + PID;
+			try {
+				Process p = Runtime.getRuntime().exec(processo);
+				System.out.println("Processo encerrado com sucesso!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			// colocar comandos do linux
+		}
 	}
 	
 	public void mataNome() {
-		
+		String Nome = "";
+		Nome = JOptionPane.showInputDialog("Digite o nome do programa a ser morto");
+		String nome = System.getProperty("os.name");
+		if(nome.contains("Windows")) {
+			String processo = "TASKKILL /IM " + Nome;
+			try {
+				Process p = Runtime.getRuntime().exec(processo);
+				System.out.println("Processo encerrado com sucesso!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			// colocar comandos do linux
+		}
 	}
+		
+	
 }
