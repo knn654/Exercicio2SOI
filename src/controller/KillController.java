@@ -32,7 +32,20 @@ public class KillController {
 				e.printStackTrace();
 			}
 		} else {
-			// colocar comandos do linux
+			String processo = "ps -ef";
+			try {
+				Process p = Runtime.getRuntime().exec(processo);
+				InputStream fluxo = p.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				while (linha != null) {
+					System.out.println(linha);
+					linha = buffer.readLine();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -50,7 +63,13 @@ public class KillController {
 				e.printStackTrace();
 			}
 		} else {
-			// colocar comandos do linux
+			String processo = "kill -9 " + PID;
+			try {
+				Process p = Runtime.getRuntime().exec(processo);
+				System.out.println("Processo encerrado com sucesso!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -67,7 +86,13 @@ public class KillController {
 				e.printStackTrace();
 			}
 		} else {
-			// colocar comandos do linux
+			String processo = "pkill -f " + Nome;
+			try {
+				Process p = Runtime.getRuntime().exec(processo);
+				System.out.println("Processo encerrado com sucesso!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 		
